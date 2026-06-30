@@ -125,7 +125,11 @@
     }
     .hamburger span {
       width: 26px; height: 3px; border-radius: 3px; transition: all .3s;
+      transform-origin: center;
     }
+    .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
     header:not(.scrolled) .hamburger span { background: #fff; }
     header.scrolled .hamburger span { background: var(--text); }
 
@@ -293,7 +297,7 @@
       letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px;
     }
     .hero-flag { display: flex; justify-content: center; margin-bottom: 16px; opacity: .85; }
-    .hero-flag img { height: 36px; border-radius: 4px; }
+    .hero-flag img { height: 42px; width: auto; border-radius: 4px; }
     .hero-card .years-bar {
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 24px;
@@ -338,7 +342,7 @@
       margin-bottom: 16px; line-height: 1.15;
     }
     .section-title .hl { background: linear-gradient(135deg, var(--red), var(--orange)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .section-sub { font-size: 16px; color: #666; max-width: 600px; margin-bottom: 48px; }
+    .section-sub { font-size: 16px; color: #666; max-width: 70ch; margin-bottom: 48px; }
 
     /* === TRÁMITES === */
     .services-grid {
@@ -367,7 +371,7 @@
     .service-card h3 { font-size: 16px; margin-bottom: 6px; }
     .service-card .benefit {
       font-size: 13px; color: #777; line-height: 1.5;
-      margin-bottom: 8px;
+      margin-bottom: 8px; max-width: 65ch;
     }
     .service-card .pain {
       display: inline-block;
@@ -513,18 +517,69 @@
       border: 1px solid rgba(255,255,255,.15);
       background: rgba(255,255,255,.06);
       color: #fff; font-family: var(--font); font-size: 14px;
-      transition: all .2s;
-    }
-    .contact-form input::placeholder, .contact-form textarea::placeholder {
-      color: rgba(255,255,255,.4);
+      transition: border-color .25s, background .25s, box-shadow .25s;
     }
     .contact-form input:focus, .contact-form textarea:focus {
       outline: none; border-color: var(--gold);
       background: rgba(255,255,255,.1);
+      box-shadow: 0 0 0 3px rgba(255,179,0,.15);
+    }
+    .contact-form input::placeholder, .contact-form textarea::placeholder {
+      color: rgba(255,255,255,.4);
     }
     .contact-form textarea { min-height: 120px; resize: vertical; }
     .contact-form select option { color: var(--text); }
     .contact-form .btn { align-self: flex-start; }
+    .contact-form .field {
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .contact-form .field label {
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,.8);
+    }
+    .contact-form .field .error-msg {
+      font-size: 12px; color: #EF5350;
+      display: none;
+    }
+    .contact-form .field .error-msg.visible {
+      display: block;
+    }
+    .contact-form .field input.error,
+    .contact-form .field textarea.error,
+    .contact-form .field select.error {
+      border-color: #EF5350;
+      background: rgba(239,83,80,.1);
+    }
+    .contact-form .form-success {
+      background: rgba(46,125,50,.15);
+      border: 1px solid rgba(46,125,50,.3);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      color: #81C784;
+      font-size: 14px;
+      display: none;
+    }
+    .contact-form .form-success.visible {
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .contact-form .btn { width: 100%; justify-content: center; }
+    }
+
+    /* === BACK TO TOP === */
+    .back-to-top {
+      position: fixed; bottom: 80px; right: 20px; z-index: 99;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--red); color: #fff; border: none;
+      font-size: 18px; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      opacity: 0; transform: translateY(20px);
+      transition: all .3s; pointer-events: none;
+    }
+    .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .back-to-top:hover { background: var(--orange); transform: translateY(-3px); }
+    @media (max-width: 900px) { .back-to-top { bottom: 90px; } }
 
     /* === SOCIAL === */
     .social-bar {
@@ -571,6 +626,9 @@
       section { padding: 60px 16px; }
       .hero { min-height: auto; padding: 100px 0 60px; }
     }
+
+    #tramites { background: #fafafa; }
+    #noticias { background: #fafafa; }
 
     /* === ANIMACIONES === */
     .fade-up { opacity: 0; transform: translateY(40px); transition: all .6s ease; }
@@ -658,7 +716,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-card">
-          <div class="hero-flag"><img src="assets/flag-maicao.svg" alt="Bandera de Maicao" loading="lazy" width="160" height="36"></div>
+          <div class="hero-flag"><img src="assets/flag-maicao.svg" alt="Bandera de Maicao" loading="lazy"></div>
           <div class="big-number">100</div>
           <div class="big-label">Años de Fundación</div>
           <div class="years-bar">
@@ -927,23 +985,46 @@
             </div>
           </div>
         </div>
-        <form class="contact-form" onsubmit="event.preventDefault(); alert('Gracias por contactarnos. Te responderemos en menos de 24h.');">
-          <input type="text" placeholder="Tu nombre completo" required>
-          <input type="email" placeholder="Tu correo electrónico" required>
-          <select required>
-            <option value="">¿Qué necesitas?</option>
-            <option>Reportar falta de agua</option>
-            <option>Petición o solicitud</option>
-            <option>Queja o reclamo</option>
-            <option>Sugerencia</option>
-            <option>Otro</option>
-          </select>
-          <textarea placeholder="Ej: No tengo agua desde hace 3 días en el barrio Villa Mery. Ya llamé a Aqualia pero no viene nadie." required></textarea>
-          <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar — respuesta en 24h</button>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="field">
+            <label for="contact-name">Nombre completo</label>
+            <input type="text" id="contact-name" placeholder="Ej: Juan Pérez" required>
+            <span class="error-msg" id="name-error"></span>
+          </div>
+          <div class="field">
+            <label for="contact-email">Correo electrónico</label>
+            <input type="email" id="contact-email" placeholder="Ej: juan@ejemplo.com" required>
+            <span class="error-msg" id="email-error"></span>
+          </div>
+          <div class="field">
+            <label for="contact-topic">¿Qué necesitas?</label>
+            <select id="contact-topic" required>
+              <option value="">Selecciona una opción</option>
+              <option>Reportar falta de agua</option>
+              <option>Petición o solicitud</option>
+              <option>Queja o reclamo</option>
+              <option>Sugerencia</option>
+              <option>Otro</option>
+            </select>
+            <span class="error-msg" id="topic-error"></span>
+          </div>
+          <div class="field">
+            <label for="contact-msg">Describe tu caso</label>
+            <textarea id="contact-msg" placeholder="Ej: No tengo agua desde hace 3 días en el barrio Villa Mery. Ya llamé a Aqualia pero no viene nadie." required></textarea>
+            <span class="error-msg" id="msg-error"></span>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle" style="font-size: 32px; margin-bottom: 8px; display: block;"></i>
+            Gracias por contactarnos. Te responderemos en menos de 24 horas hábiles.
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> Enviar — respuesta en 24h</button>
         </form>
       </div>
     </div>
   </section>
+
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Volver arriba"><i class="fas fa-chevron-up"></i></button>
 
   <!-- SOCIAL -->
   <div class="social-bar">
@@ -967,23 +1048,30 @@
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.createElement('div');
     mobileNav.className = 'mobile-nav';
+    function closeMobileNav() {
+      hamburger.classList.remove('active');
+      mobileNav.remove();
+    }
     mobileNav.innerHTML = `
       <div style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:999;"
-           onclick="this.parentElement.remove()">
+           onclick="closeMobileNav()">
         <div style="background:#fff;width:85%;max-width:320px;height:100%;padding:24px;overflow-y:auto;"
              onclick="event.stopPropagation()">
-          <button style="background:none;border:none;font-size:24px;cursor:pointer;float:right;" onclick="this.closest('.mobile-nav').remove()">&times;</button>
+          <button style="background:none;border:none;font-size:24px;cursor:pointer;float:right;" onclick="closeMobileNav()">&times;</button>
           <div style="margin-top:40px;">
-            <a href="#tramites" style="display:block;padding:14px 16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;">Trámites</a>
-            <a href="#transparencia" style="display:block;padding:14px 16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;">Transparencia</a>
-            <a href="#cultura" style="display:block;padding:14px 16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;">Cultura</a>
-            <a href="#noticias" style="display:block;padding:14px 16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;">Noticias</a>
-            <a href="#historia" style="display:block;padding:14px 16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;">Historia</a>
-            <a href="#contacto" style="display:block;padding:14px 16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;">Contacto</a>
+            <a href="#tramites" style="display:block;padding:16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;" onclick="closeMobileNav()">Trámites</a>
+            <a href="#transparencia" style="display:block;padding:16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;" onclick="closeMobileNav()">Transparencia</a>
+            <a href="#cultura" style="display:block;padding:16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;" onclick="closeMobileNav()">Cultura</a>
+            <a href="#noticias" style="display:block;padding:16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;" onclick="closeMobileNav()">Noticias</a>
+            <a href="#historia" style="display:block;padding:16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;" onclick="closeMobileNav()">Historia</a>
+            <a href="#contacto" style="display:block;padding:16px;border-radius:10px;text-decoration:none;color:#212121;font-weight:500;" onclick="closeMobileNav()">Contacto</a>
           </div>
         </div>
       </div>`;
-    hamburger.addEventListener('click', () => document.body.appendChild(mobileNav));
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.add('active');
+      document.body.appendChild(mobileNav);
+    });
 
     // === HEADER SCROLL ===
     const header = document.getElementById('header');
@@ -1001,6 +1089,15 @@
       } else {
         sticky.classList.remove('visible');
       }
+    });
+
+    // === BACK TO TOP ===
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // === SCROLL ANIMATIONS ===
@@ -1064,6 +1161,37 @@
         setTimeout(() => ripple.remove(), 600);
       });
     });
+
+    // === FORM VALIDATION ===
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        let valid = true;
+        contactForm.querySelectorAll('.error-msg').forEach(el => el.classList.remove('visible'));
+        contactForm.querySelectorAll('input, textarea, select').forEach(el => el.classList.remove('error'));
+        const fields = [
+          { id: 'contact-name', errorId: 'name-error', msg: 'Por favor ingresa tu nombre' },
+          { id: 'contact-email', errorId: 'email-error', msg: 'Ingresa un correo electrónico válido' },
+          { id: 'contact-topic', errorId: 'topic-error', msg: 'Selecciona una opción' },
+          { id: 'contact-msg', errorId: 'msg-error', msg: 'Por favor describe tu caso' },
+        ];
+        fields.forEach(({ id, errorId, msg }) => {
+          const el = document.getElementById(id);
+          const err = document.getElementById(errorId);
+          if (!el.value || (el.type === 'email' && !el.value.includes('@'))) {
+            valid = false;
+            el.classList.add('error');
+            err.textContent = msg;
+            err.classList.add('visible');
+          }
+        });
+        if (valid) {
+          document.getElementById('submitBtn').style.display = 'none';
+          document.getElementById('formSuccess').classList.add('visible');
+        }
+      });
+    }
 
     // === SMOOTH SCROLL NAV ===
     document.querySelectorAll('a[href^="#"]').forEach(a => {
