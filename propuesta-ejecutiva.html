@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta — Plataforma Digital Alcaldía de Maicao</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C62828; --orange: #E65100; --gold: #FFB300;
+    --dark: #1a1a2e; --text: #212121; --gray: #f5f5f5;
+  }
+  body {
+    font-family: 'Inter', sans-serif; color: var(--text);
+    background: #fff; margin: 0; padding: 0;
+    line-height: 1.6;
+  }
+  @media print {
+    body { font-size: 11pt; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+  }
+  .page {
+    max-width: 800px; margin: 0 auto; padding: 60px 48px;
+  }
+  .cover {
+    display: flex; flex-direction: column; justify-content: center;
+    min-height: 100vh; background: linear-gradient(135deg, #1a1a2e 0%, #2d0a0a 100%);
+    color: #fff; padding: 80px 60px;
+    position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('assets/flag-maicao.svg');
+    background-repeat: repeat; background-size: 60px 38px;
+    opacity: .04;
+  }
+  .cover h1 { font-family: 'Playfair Display', serif; font-size: 48px; line-height: 1.1; margin: 0 0 8px; position: relative; }
+  .cover h1 span { color: var(--gold); }
+  .cover .subtitle { font-size: 22px; color: rgba(255,255,255,.7); margin-bottom: 40px; font-weight: 300; }
+  .cover .meta { border-top: 1px solid rgba(255,255,255,.15); padding-top: 24px; font-size: 14px; color: rgba(255,255,255,.5); }
+  .cover .meta strong { color: rgba(255,255,255,.8); }
+  .cover .badge {
+    display: inline-block; background: var(--gold); color: #1a1a2e;
+    padding: 6px 20px; border-radius: 24px; font-size: 14px; font-weight: 700;
+    margin-bottom: 24px; letter-spacing: 1px;
+  }
+  h2 { font-family: 'Playfair Display', serif; font-size: 28px; margin: 48px 0 16px; color: var(--red); }
+  h2:first-of-type { margin-top: 0; }
+  h3 { font-size: 18px; margin: 32px 0 12px; color: var(--orange); }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 16px; padding-left: 24px; }
+  li { margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
+  th { background: var(--red); color: #fff; text-align: left; padding: 10px 16px; }
+  td { padding: 10px 16px; border-bottom: 1px solid #eee; }
+  tr:nth-child(even) td { background: #fafafa; }
+  .info-box {
+    background: #FFF8E1; border-left: 4px solid var(--gold);
+    padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0;
+  }
+  .info-box strong { color: var(--orange); }
+  .warning-box {
+    background: #FFEBEE; border-left: 4px solid var(--red);
+    padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0;
+  }
+  .success-box {
+    background: #E8F5E9; border-left: 4px solid #2E7D32;
+    padding: 16px 20px; margin: 16px 0; border-radius: 0 8px 8px 0;
+  }
+  .btn-print {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: var(--red); color: #fff; border: none;
+    padding: 12px 24px; border-radius: 8px; font-size: 15px; font-weight: 600;
+    cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,.2);
+  }
+  .btn-print:hover { background: #8E1B1B; }
+  .toc { margin: 32px 0 48px; padding: 0; list-style: none; }
+  .toc li { padding: 6px 0; border-bottom: 1px dotted #ddd; display: flex; justify-content: space-between; }
+  .toc a { color: var(--red); text-decoration: none; font-weight: 500; }
+  .signature { margin-top: 64px; padding-top: 32px; border-top: 2px solid #eee; }
+  .signature-line { width: 240px; border-top: 1px solid #333; margin: 48px 0 8px; }
+  .number { font-weight: 700; color: var(--red); font-size: 32px; font-family: 'Playfair Display', serif; }
+</style>
+</head>
+<body>
+<button class="btn-print no-print" onclick="window.print()">🖨 Guardar como PDF</button>
+
+<div class="cover">
+  <div class="badge">PROPUESTA TÉCNICA Y ECONÓMICA</div>
+  <h1>Plataforma Digital<br>para la <span>Alcaldía de Maicao</span></h1>
+  <div class="subtitle">Modernización tecnológica, transparencia y cercanía con el ciudadano<br>en el marco del Centenario 1927–2027</div>
+  <div class="meta">
+    <strong>Preparado para:</strong> Miguel Felipe Aragón González<br>
+    Alcalde Municipal de Maicao · La Guajira<br><br>
+    <strong>Fecha:</strong> Junio 2026 &nbsp;|&nbsp; <strong>Versión:</strong> 1.0<br>
+    <strong>Clasificación:</strong> Documento informativo sin compromiso contractual
+  </div>
+</div>
+
+<div class="page page-break">
+  <h2>Índice</h2>
+  <ol class="toc">
+    <li><a href="#resumen">Resumen Ejecutivo</a> <span>3</span></li>
+    <li><a href="#diagnostico">Diagnóstico Situacional</a> <span>4</span></li>
+    <li><a href="#solucion">Solución Propuesta</a> <span>6</span></li>
+    <li><a href="#presupuesto">Estructura de Costos</a> <span>8</span></li>
+    <li><a href="#plan">Alineación con el Plan de Desarrollo</a> <span>9</span></li>
+    <li><a href="#ruta">Ruta de Contratación</a> <span>10</span></li>
+    <li><a href="#cronograma">Cronograma</a> <span>11</span></li>
+    <li><a href="#contacto">Información de Contacto</a> <span>12</span></li>
+  </ol>
+</div>
+
+<div class="page page-break">
+  <h2 id="resumen">1. Resumen Ejecutivo</h2>
+
+  <p>Maicao se encuentra en un momento histórico: su centenario (1927–2027) y la Ley 2571 de 2026 que declara el Año del Centenario. Sin embargo, la Administración Municipal enfrenta desafíos tecnológicos críticos que limitan su capacidad de gestión, comunicación y servicio al ciudadano.</p>
+
+  <p>Esta propuesta presenta una <strong>plataforma digital integral</strong> (sitio web moderno + aplicación móvil) diseñada a la medida de Maicao, que resuelve los problemas actuales de tecnología obsoleta, ausencia de canales digitales de PQRS, falta de transparencia en datos y mala comunicación con los ciudadanos.</p>
+
+  <div class="success-box">
+    <strong>Valor total estimado:</strong> $142–185 millones COP · <strong>Plazo:</strong> 16 semanas · <strong>Retorno político:</strong> Inmediato
+  </div>
+
+  <p>Se ha desarrollado un <strong>prototipo funcional</strong> del sitio web, accesible en <a href="https://maicao-web.vercel.app">maicao-web.vercel.app</a>, que demuestra el concepto y puede presentarse al alcalde para validación inmediata.</p>
+</div>
+
+<div class="page page-break">
+  <h2 id="diagnostico">2. Diagnóstico Situacional</h2>
+
+  <h3>2.1 Estado actual de la infraestructura tecnológica</h3>
+
+  <div class="warning-box">
+    <strong>Hallazgo crítico:</strong> El portal institucional actual usa AngularJS (framework deprecado desde 2022), FontAwesome 4.1.0 (2014), no tiene versión móvil y carece de PQRS digital.
+  </div>
+
+  <table>
+    <tr><th>Componente</th><th>Estado Actual</th><th>Riesgo</th></tr>
+    <tr><td>Sitio web institucional</td><td>Plantilla "Mi Colombia Digital" de MinTIC (AngularJS, 2014)</td><td>🔴 Alto</td></tr>
+    <tr><td>App móvil</td><td>No existe</td><td>🔴 Alto</td></tr>
+    <tr><td>PQRS digital</td><td>No existe (solo presencial)</td><td>🔴 Alto</td></tr>
+    <tr><td>Portal de impuestos</td><td>Dominio separado con puerto 8080, sistema legacy</td><td>🟡 Medio</td></tr>
+    <tr><td>Interoperabilidad</td><td>Secretarías sin sistemas conectados</td><td>🔴 Alto</td></tr>
+    <tr><td>Datos abiertos</td><td>No publicados</td><td>🟡 Medio</td></tr>
+  </table>
+
+  <h3>2.2 Problemas administrativos identificados</h3>
+  <ul>
+    <li><strong>Recursos congelados:</strong> Por 8 meses la Alcaldía no reportó a Planeación Nacional, reteniendo $9,800M COP en el Banco de Proyectos.</li>
+    <li><strong>Bajo recaudo:</strong> Falta de canales digitales de pago reduce la capacidad de cobro de predial e industria y comercio.</li>
+    <li><strong>Mala comunicación:</strong> Sin canales digitales modernos, los ciudadanos no conocen los programas ni logros de la administración.</li>
+    <li><strong>Tecnología obsoleta:</strong> La plantilla Mi Colombia Digital no puede actualizarse sin reescribir completamente el frontend.</li>
+  </ul>
+
+  <div class="info-box">
+    <strong>Dato relevante:</strong> La Alcaldía ha contratado servicios tecnológicos por ~$265M COP (BPIN 202600000013032) con resultados mediocres. Se requiere un enfoque diferente.
+  </div>
+</div>
+
+<div class="page page-break">
+  <h2 id="solucion">3. Solución Propuesta</h2>
+
+  <h3>3.1 Portal web institucional</h3>
+  <p>Sitio web moderno, mobile-first, diseñado con la identidad visual del centenario de Maicao. Incluye:</p>
+  <ul>
+    <li><strong>Hero del Centenario:</strong> Llamado a la acción conmemorativo con contador regresivo a 2027.</li>
+    <li><strong>Sistema de PQRS digital:</strong> Formulario inteligente con seguimiento en tiempo real y notificaciones.</li>
+    <li><strong>Reporte de agua:</strong> Módulo específico para reportar fugas y cortes, integrado con Esepgua.</li>
+    <li><strong>Pago de impuestos en línea:</strong> Integración con pasarela de pagos para predial e industria y comercio.</li>
+    <li><strong>Dashboard de transparencia:</strong> Datos abiertos de ejecución presupuestal, contratación y obras en tiempo real.</li>
+    <li><strong>Directorio de secretarías:</strong> Contacto directo con cada dependencia, incluyendo horarios y responsables.</li>
+    <li><strong>Galería del centenario:</strong> Línea de tiempo interactiva con la historia de Maicao desde 1927.</li>
+    <li><strong>Sección de noticias:</strong> Blog de la administración con fotos y comunicados oficiales.</li>
+    <li><strong>Mapa de obras:</strong> Visualización georreferenciada de proyectos en ejecución.</li>
+    <li><strong>Encuestas ciudadanas:</strong> Mecanismo de participación para priorizar inversiones.</li>
+  </ul>
+
+  <h3>3.2 Aplicación móvil</h3>
+  <ul>
+    <li><strong>App híbrida (React Native):</strong> iOS y Android con un solo código base.</li>
+    <li><strong>Notificaciones push:</strong> Alertas de cortes de agua, eventos, fechas de pago y recordatorios.</li>
+    <li><strong>PQRS móvil con foto:</strong> Reportes con geolocalización y evidencia fotográfica.</li>
+    <li><strong>Escáner de facturas:</strong> Lectura de código de barras para consulta y pago de impuestos.</li>
+    <li><strong>Modo offline:</strong> Consulta de trámites y directorio sin conexión a internet.</li>
+    <li><strong>Wayuunaiki opcional:</strong> Interfaz en lengua Wayuu para inclusión cultural.</li>
+  </ul>
+
+  <h3>3.3 Beneficios clave</h3>
+  <table>
+    <tr><th>Indicador</th><th>Situación Actual</th><th>Con Plataforma</th></tr>
+    <tr><td>Tiempo de respuesta PQRS</td><td>15–30 días (presencial)</td><td>24–48 horas</td></tr>
+    <tr><td>Cobertura digital</td><td>Solo web escritorio</td><td>Web + App (iOS/Android)</td></tr>
+    <tr><td>Recaudo de impuestos</td><td>Solo presencial</td><td>24/7 en línea</td></tr>
+    <tr><td>Comunicación ciudadana</td><td>Sin canales digitales</td><td>Notificaciones push + redes</td></tr>
+    <tr><td>Transparencia</td><td>Sin datos abiertos</td><td>Dashboard en tiempo real</td></tr>
+  </table>
+</div>
+
+<div class="page page-break">
+  <h2 id="presupuesto">4. Estructura de Costos</h2>
+
+  <p>Estimación basada en tarifas de mercado colombiano para desarrollo de software público, incluyendo los honorarios del equipo técnico, infraestructura cloud y licencias requeridas.</p>
+
+  <table>
+    <tr><th>Componente</th><th>Descripción</th><th>Valor Estimado</th></tr>
+    <tr><td>Fase 1: Portal Web</td><td>Diseño UX/UI + desarrollo frontend + backend PQRS + pasarela de pagos + dashboard transparencia</td><td><strong>$65–85M</strong></td></tr>
+    <tr><td>Fase 2: App Móvil</td><td>App híbrida (React Native) iOS/Android con notificaciones push, PQRS con foto, escáner, offline</td><td><strong>$55–70M</strong></td></tr>
+    <tr><td>Infraestructura (1 año)</td><td>Hosting cloud, CDN, base de datos, SSL, monitoreo 24/7</td><td><strong>$12–15M</strong></td></tr>
+    <tr><td>Capacitación</td><td>Talleres con funcionarios de cada secretaría (3 sesiones)</td><td><strong>$5–8M</strong></td></tr>
+    <tr><td>Garantía y soporte (1 año)</td><td>Mantenimiento correctivo + evolutivo + soporte técnico</td><td><strong>$5–7M</strong></td></tr>
+    <tr style="font-weight: 700; background: #FFF8E1;"><td><strong>TOTAL</strong></td><td></td><td><strong>$142–185M</strong></td></tr>
+  </table>
+
+  <div class="info-box">
+    <strong>Nota:</strong> Este valor representa entre el 53% y 70% del presupuesto previamente asignado por la Alcaldía para tecnología (~$265M, BPIN 202600000013032), ofreciendo un entregable sustancialmente superior en calidad y alcance.
+  </div>
+
+  <h3>Forma de pago sugerida</h3>
+  <ul>
+    <li><strong>Anticipo:</strong> 40% al inicio</li>
+    <li><strong>Hito 1 (Portal web funcional):</strong> 30% a las 8 semanas</li>
+    <li><strong>Hito 2 (App móvil funcional):</strong> 20% a las 14 semanas</li>
+    <li><strong>Acta de recibo final:</strong> 10% contra entrega y capacitación</li>
+  </ul>
+</div>
+
+<div class="page page-break">
+  <h2 id="plan">5. Alineación con el Plan de Desarrollo</h2>
+
+  <p><strong>"Maicao es Tiempo de Avanzar 2024–2027"</strong> del alcalde Miguel Felipe Aragón González establece como pilares:</p>
+
+  <table>
+    <tr><th>Pilar del PDM</th><th>Cómo lo aborda esta propuesta</th></tr>
+    <tr><td>Gobierno Abierto y Transparente</td><td>Dashboard de transparencia con datos abiertos de ejecución presupuestal y contratación en tiempo real.</td></tr>
+    <tr><td>Servicios Públicos Eficientes</td><td>Módulo de reporte de agua integrado con Esepgua, con SLA de respuesta de 24h.</td></tr>
+    <tr><td>Desarrollo Económico Local</td><td>Portal de pagos de impuestos que facilita el recaudo y libera recursos para inversión social.</td></tr>
+    <tr><td>Identidad Cultural y Turismo</td><td>Sección de las 3 culturas (Wayuu, Árabe, Criolla) + galería del centenario + directorio turístico.</td></tr>
+    <tr><td>Participación Ciudadana</td><td>PQRS digital + encuestas ciudadanas + georreferenciación de obras con comentarios públicos.</td></tr>
+    <tr><td>Infraestructura y Desarrollo</td><td>Mapa de obras interactivo con fotos de antes/durante/después, mostrando avance de gestión.</td></tr>
+  </table>
+
+  <h3>Alineación con el Centenario (Ley 2571 de 2026)</h3>
+  <p>La plataforma digital servirá como el principal <strong>legado tecnológico del centenario</strong>, demostrando que Maicao no solo celebra su pasado sino que invierte en su futuro digital. El sitio web lleva la marca "100 AÑOS" como sello permanente durante 2026–2027.</p>
+
+  <div class="success-box">
+    <strong>Impacto político esperado:</strong> El alcalde Aragón González (20K seguidores en Instagram) podrá mostrar una plataforma digital moderna como logro tangible de su administración, mejorando su imagen de gestión moderna y cercana al ciudadano.
+  </div>
+</div>
+
+<div class="page page-break">
+  <h2 id="ruta">6. Ruta de Contratación</h2>
+
+  <h3>Opción recomendada: Contrato de Prestación de Servicios</h3>
+  <p>Marco legal: <strong>Ley 80 de 1993</strong> y <strong>Ley 1150 de 2007</strong>, mediante contratación directa por <strong>prestación de servicios profesionales y de apoyo a la gestión</strong> (Art. 2, numeral 4, Ley 1150).</p>
+
+  <table>
+    <tr><th>Modalidad</th><th>Ventajas</th><th>Consideraciones</th></tr>
+    <tr><td><strong>Prestación de servicios</strong><br>(Contratación directa)</td>
+        <td>Rápida (2–4 semanas), sin proceso de licitación pública, aplica para desarrollo de software</td>
+        <td>Requiere justificación técnica de la singularidad del objeto contractual. Monto máximo: según capacidad de la entidad.</td></tr>
+    <tr><td><strong>Mínima Cuantía</strong><br>(Si aplica por fases &lt; 20 SMMLV)</td>
+        <td>Proceso simplificado, publicación en SECOP II por 3 días hábiles</td>
+        <td>Límite por fase: ~$28M (2026). Puede dividirse en fases independientes.</td></tr>
+    <tr><td><strong>Convenio de Cooperación</strong></td>
+        <td>Permite donación de plataforma si hay interés de la contraparte técnica</td>
+        <td>Requiere contrapartida de la Alcaldía. Menos control sobre propiedad intelectual.</td></tr>
+  </table>
+
+  <h3>Proceso paso a paso (recomendado)</h3>
+  <ol>
+    <li><strong>Reunión técnica</strong> con Secretaría TIC/Planeación para presentar el prototipo funcional.</li>
+    <li><strong>Carta de intención</strong> del alcalde manifestando interés en la plataforma.</li>
+    <li><strong>Estudio de conveniencia</strong> (Art. 2.2.1.1.2.1.1 Decreto 1082 de 2015) justificando la necesidad.</li>
+    <li><strong>Certificado de disponibilidad presupuestal (CDP)</strong> expedido por Secretaría de Hacienda.</li>
+    <li><strong>Publicación en SECOP II</strong> del proceso de contratación directa (3 días para observaciones).</li>
+    <li><strong>Firma del contrato</strong> y expedición del Registro Presupuestal (RP).</li>
+    <li><strong>Ejecución</strong> con hitos de pago vinculados a entregables.</li>
+  </ol>
+
+  <div class="info-box">
+    <strong>Recomendación estratégica:</strong> Iniciar el contacto con la <strong>Secretaría de Planeación / TIC</strong> para presentar el prototipo. Ellos serán los aliados internos para viabilizar el proyecto ante el Despacho del Alcalde.
+  </div>
+</div>
+
+<div class="page page-break">
+  <h2 id="cronograma">7. Cronograma Estimado</h2>
+
+  <table>
+    <tr><th>Semana</th><th>Actividad</th><th>Entregable</th></tr>
+    <tr><td>1–2</td><td>Levantamiento de requerimientos con cada secretaría</td><td>Documento de especificaciones funcionales</td></tr>
+    <tr><td>3–4</td><td>Diseño UX/UI y prototipado</td><td>Prototipo navegable en Figma</td></tr>
+    <tr><td>5–8</td><td><strong>Fase 1:</strong> Desarrollo portal web + PQRS + pagos</td><td>Portal web funcional en staging</td></tr>
+    <tr><td>9</td><td>Pruebas de usuario y corrección</td><td>Portal web en producción</td></tr>
+    <tr><td>10–14</td><td><strong>Fase 2:</strong> Desarrollo app móvil</td><td>App en TestFlight (iOS) + Play Console (Android)</td></tr>
+    <tr><td>15</td><td>Pruebas integrales y capacitación a funcionarios</td><td>Manuales de usuario + sesiones de entrenamiento</td></tr>
+    <tr><td>16</td><td><strong>Lanzamiento oficial</strong> (evento centenario)</td><td>Plataforma 100% operativa + rueda de prensa</td></tr>
+  </table>
+
+  <p><strong>Duración total:</strong> 16 semanas (~4 meses) desde la firma del contrato.</p>
+
+  <div class="success-box">
+    <strong>Hito político recomendado:</strong> Programar el lanzamiento oficial de la plataforma como parte de la agenda del Centenario de Maicao (junio 2026 – junio 2027), generando cobertura mediática local y departamental.
+  </div>
+</div>
+
+<div class="page">
+  <h2 id="contacto">8. Contacto</h2>
+
+  <p>Para programar una reunión de presentación del prototipo funcional con la Secretaría de Planeación/TIC o directamente con el Despacho del Alcalde:</p>
+
+  <div class="info-box">
+    <strong>Contacto directo:</strong><br>
+    Nombre del proponente / Empresa<br>
+    Correo electrónico<br>
+    Teléfono / WhatsApp<br>
+    Ciudad
+  </div>
+
+  <p><em>El prototipo funcional está accesible en:</em><br>
+  <strong><a href="https://maicao-web.vercel.app">https://maicao-web.vercel.app</a></strong></p>
+
+  <div class="signature">
+    <p>Agradecemos la atención a esta propuesta y quedamos atentos para una reunión de presentación.</p>
+    <p>Atentamente,</p>
+    <div class="signature-line"></div>
+    <p><strong>[Nombre del firmante]</strong><br>
+    [Cargo]<br>
+    [Fecha]</p>
+  </div>
+</div>
+
+</body>
+</html>
