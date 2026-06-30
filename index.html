@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maicao 100 Años — Alcaldía Municipal</title>
   <meta name="description" content="Sitio oficial de la Alcaldía Municipal de Maicao, La Guajira. Conmemoración de los 100 años de fundación 1927-2027.">
-  <link rel="icon" type="image/svg+xml" href="assets/escudo-maicao.svg">
+  <link rel="icon" type="image/png" href="assets/escudo-maicao.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -67,7 +69,7 @@
     header:not(.scrolled) nav a:hover { background: rgba(255,255,255,.1); color: var(--gold); }
     header:not(.scrolled) .logo-text strong { color: #fff; }
     header:not(.scrolled) .logo-text small { color: rgba(255,255,255,.7); }
-    header:not(.scrolled) .badge-100 { background: rgba(255,255,255,.15); color: var(--gold); }
+
     header:not(.scrolled) .hamburger span { background: #fff; }
     .header-inner {
       max-width: 1280px; margin: 0 auto;
@@ -94,16 +96,12 @@
     header .logo-text strong { transition: color .3s; }
     header .logo-text small { transition: color .3s; }
     .badge-100 {
-      background: rgba(255,255,255,.15);
-      color: var(--gold);
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      color: #fff;
       padding: 4px 12px; border-radius: 20px;
       font-size: 12px; font-weight: 700; margin-left: 8px;
       white-space: nowrap;
-      transition: all .3s;
-    }
-    header.scrolled .badge-100 {
-      background: linear-gradient(135deg, var(--gold), var(--orange));
-      color: #fff;
+      box-shadow: 0 2px 8px rgba(255,179,0,.3);
     }
     nav { display: flex; align-items: center; gap: 4px; }
     nav a {
@@ -562,7 +560,7 @@
   <header id="header">
     <div class="header-inner">
       <a href="#" class="logo">
-        <div class="logo-img"><img src="assets/escudo-maicao.svg" alt="Escudo de Maicao"></div>
+        <div class="logo-img"><img src="assets/escudo-maicao.png" alt="Escudo de Maicao" width="44" height="58"></div>
         <div class="logo-text">
           <strong>Alcaldía de Maicao</strong>
           <small>La Guajira · Colombia</small>
@@ -612,7 +610,7 @@
       </div>
       <div class="hero-visual">
         <div class="hero-card">
-          <div class="hero-flag"><img src="assets/flag-maicao.svg" alt="Bandera de Maicao"></div>
+          <div class="hero-flag"><img src="assets/flag-maicao.svg" alt="Bandera de Maicao" loading="lazy" width="160" height="36"></div>
           <div class="big-number">100</div>
           <div class="big-label">Años de Fundación</div>
           <div class="years-bar">
