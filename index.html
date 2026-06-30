@@ -86,7 +86,7 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .logo-img img { height: 100%; width: auto; }
+    .logo-img img { height: 100%; width: auto; filter: drop-shadow(0 0 4px rgba(255,179,0,.15)); }
     .logo-text { display: flex; flex-direction: column; }
     .logo-text strong { font-size: 16px; line-height: 1.2; }
     .logo-text small {
@@ -171,11 +171,12 @@
     }
     .hero-pattern {
       position: absolute; inset: 0;
-      opacity: .06;
+      opacity: .05;
       background-image:
-        repeating-linear-gradient(45deg, #fff 0px, #fff 2px, transparent 2px, transparent 8px),
-        repeating-linear-gradient(-45deg, #fff 0px, #fff 2px, transparent 2px, transparent 8px);
-      background-size: 40px 40px;
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,179,0,.08) 40px, rgba(255,179,0,.08) 42px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,179,0,.08) 40px, rgba(255,179,0,.08) 42px),
+        radial-gradient(circle at 30% 70%, rgba(255,179,0,.06) 0%, transparent 50%);
+      background-size: 80px 80px, 80px 80px, 100% 100%;
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -323,9 +324,9 @@
       padding: 28px; box-shadow: var(--shadow);
       text-decoration: none; color: var(--text);
       transition: all .25s; display: block;
-      border: 1px solid #eee;
+      border: 1px solid rgba(0,0,0,.04);
     }
-    .service-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,.1); border-color: var(--gold); }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 4px 24px rgba(0,0,0,.08); border-color: var(--gold); }
     .service-card .icon {
       width: 52px; height: 52px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
@@ -395,10 +396,10 @@
       background: #fff; border-radius: var(--radius);
       padding: 28px 24px; text-align: center;
       box-shadow: var(--shadow);
-      border: 1px solid #eee;
+      border: 1px solid rgba(0,0,0,.04);
       transition: all .25s;
     }
-    .t-card:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,.08); }
+    .t-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,.06); }
     .t-card .num {
       font-family: var(--display); font-size: 42px;
       font-weight: 900; color: var(--red); line-height: 1;
@@ -420,10 +421,10 @@
     .timeline-card {
       background: #fff; border-radius: var(--radius);
       padding: 24px; box-shadow: var(--shadow);
-      border-left: 4px solid var(--gold);
+      border-left: 5px solid var(--gold);
       transition: all .25s;
     }
-    .timeline-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,.1); }
+    .timeline-card:hover { transform: translateY(-4px); box-shadow: 0 4px 24px rgba(0,0,0,.08); }
     .timeline-card .year {
       font-family: var(--display); font-size: 28px;
       color: var(--red); font-weight: 900;
@@ -441,7 +442,7 @@
       overflow: hidden; box-shadow: var(--shadow);
       transition: all .25s;
     }
-    .news-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,.1); }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 4px 24px rgba(0,0,0,.08); }
     .news-card .thumb {
       height: 180px; background: linear-gradient(135deg, var(--blue-dark), var(--red-dark));
       display: flex; align-items: center; justify-content: center;
