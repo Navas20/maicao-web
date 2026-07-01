@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maicao-web.vercel.app/sitemap.xml

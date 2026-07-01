@@ -5,6 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maicao 100 Años — Alcaldía Municipal</title>
   <meta name="description" content="Sitio oficial de la Alcaldía Municipal de Maicao, La Guajira. Conmemoración de los 100 años de fundación 1927-2027.">
+  <meta property="og:title" content="Maicao 100 Años — Alcaldía Municipal">
+  <meta property="og:description" content="Sitio oficial de la Alcaldía Municipal de Maicao. Trámites, reportes y noticias del municipio centenario de La Guajira.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maicao-web.vercel.app">
+  <meta property="og:image" content="https://maicao-web.vercel.app/assets/flag-maicao.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Maicao 100 Años — Alcaldía Municipal">
+  <meta name="twitter:description" content="Trámites, reportes y noticias del municipio centenario de La Guajira.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GovernmentOrganization",
+    "name": "Alcaldía Municipal de Maicao",
+    "description": "Gobierno municipal de Maicao, La Guajira, Colombia. Conmemoración del Centenario 1927-2027.",
+    "url": "https://maicao-web.vercel.app",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle 12 # 11-36, Centro",
+      "addressLocality": "Maicao",
+      "addressRegion": "La Guajira",
+      "addressCountry": "CO"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+57-602-726-8930",
+      "contactType": "customer service"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Maicao"
+    },
+    "foundingDate": "1927"
+  }
+  </script>
   <link rel="icon" type="image/png" href="assets/escudo-maicao.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -691,9 +725,53 @@
     .timeline .fade-up:nth-child(5) { transition-delay: 240ms; }
     .timeline .fade-up:nth-child(6) { transition-delay: 300ms; }
     .timeline .fade-up:nth-child(7) { transition-delay: 360ms; }
+
+    /* === DARK MODE === */
+    :root { --bg: #fff; --bg-alt: #fafafa; --card-bg: #fff; --text-secondary: #555; --border: rgba(0,0,0,.08); --header-bg: rgba(255,255,255,.95); }
+    body.dark { --bg: #0d1117; --bg-alt: #161b22; --card-bg: #1c2333; --text: #e6edf3; --text-secondary: #8b949e; --border: rgba(255,255,255,.08); --header-bg: rgba(13,17,23,.95); --shadow: 0 4px 30px rgba(0,0,0,.3); }
+    body { background: var(--bg); }
+    body.dark .top-bar { background: linear-gradient(135deg, #b8860b, #cc5500); }
+    body.dark header.scrolled { background: var(--header-bg); }
+    body.dark .service-card, body.dark .t-card, body.dark .news-card, body.dark .timeline-card, body.dark .contact-form { background: var(--card-bg); border-color: var(--border); }
+    body.dark .contact-info div { background: var(--card-bg); border-color: var(--border); }
+    body.dark .contact-form input, body.dark .contact-form textarea { background: var(--bg-alt); color: var(--text); border-color: var(--border); }
+    body.dark .contact-form label { color: var(--text-secondary); }
+    body.dark #noticias { background: var(--bg-alt); }
+    body.dark .service-card .benefit, body.dark .news-card .body p { color: var(--text-secondary); }
+    body.dark .section-sub { color: var(--text-secondary); }
+    body.dark .sticky-bottom { background: var(--card-bg); border-top-color: var(--border); }
+    body.dark footer { background: var(--bg-alt); border-top-color: var(--border); }
+    body.dark .num-label { color: var(--text-secondary); }
+    body.dark .badge-100 { box-shadow: 0 2px 8px rgba(255,179,0,.15); }
+    body.dark .hero-card { background: var(--card-bg); }
+    body.dark .hero-stats div { background: var(--bg-alt); }
+    /* Dark mode toggle */
+    .theme-toggle { background: none; border: none; cursor: pointer; font-size: 18px; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; transition: background .2s, color .2s; width: 40px; height: 40px; }
+    header:not(.scrolled) .theme-toggle { color: #fff; }
+    header.scrolled .theme-toggle { color: var(--text); }
+    .theme-toggle:hover { background: rgba(255,255,255,.1); }
+    body.dark .theme-toggle { color: var(--gold); }
+    .theme-toggle .sun-icon { display: none; } .theme-toggle .moon-icon { display: inline; }
+    body.dark .theme-toggle .sun-icon { display: inline; } body.dark .theme-toggle .moon-icon { display: none; }
+
+    /* === SKIP LINK === */
+    .skip-link { position: fixed; top: -100%; left: 16px; z-index: 9999; padding: 12px 24px; background: var(--gold); color: #000; font-weight: 700; border-radius: 0 0 8px 8px; text-decoration: none; transition: top .2s; }
+    .skip-link:focus { top: 0; }
+
+    /* === PRINT === */
+    @media print {
+      .progress-bar, .back-to-top, .sticky-bottom, .social-bar, .scroll-indicator, .hamburger, nav, .theme-toggle, .hero-buttons, .contact-form { display: none !important; }
+      header { position: static; background: #fff !important; box-shadow: none !important; }
+      body { font-size: 12pt; color: #000; background: #fff; }
+      .section { page-break-inside: avoid; }
+      .hero { min-height: auto; padding: 20px; }
+      a { color: #000 !important; text-decoration: underline; }
+    }
   </style>
 </head>
 <body>
+
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
   <div class="progress-bar"></div>
 
@@ -704,7 +782,7 @@
   </div>
 
   <!-- HEADER -->
-  <header id="header">
+  <header id="header" role="banner">
     <div class="header-inner">
       <a href="#" class="logo">
         <div class="logo-img"><img src="assets/escudo-maicao.png" alt="Escudo de Maicao" width="44" height="58"></div>
@@ -722,13 +800,17 @@
         <a href="#historia">Historia</a>
         <a href="#contacto">Contacto</a>
       </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema oscuro/claro" title="Modo oscuro">
+        <i class="fas fa-moon moon-icon"></i>
+        <i class="fas fa-sun sun-icon"></i>
+      </button>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
   <!-- STICKY BOTTOM BAR (móvil) -->
   <div class="sticky-bottom" id="stickyBottom">
     <a href="#contacto" class="btn btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'});return false;">
@@ -1080,7 +1162,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
+  <footer role="contentinfo">
     <p>
       © 2026 <strong>Alcaldía Municipal de Maicao</strong> · La Guajira, Colombia
       · <span class="footer-100">100 AÑOS</span> · Ley 2571 de 2026
@@ -1242,8 +1324,19 @@
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth' });
         }
-      });
     });
+
+    // === DARK MODE ===
+    (function() {
+      const toggle = document.getElementById('themeToggle');
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (!stored && prefersDark)) document.body.classList.add('dark');
+      toggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      });
+    })();
   </script>
 </body>
 </html>
