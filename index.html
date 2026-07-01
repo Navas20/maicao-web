@@ -726,12 +726,17 @@
     .timeline .fade-up:nth-child(6) { transition-delay: 300ms; }
     .timeline .fade-up:nth-child(7) { transition-delay: 360ms; }
 
-    /* === DARK MODE === */
+    /* === DARK MODE (paleta cálida — rojo, dorado, crema) === */
     :root { --bg: #fff; --bg-alt: #fafafa; --card-bg: #fff; --text-secondary: #555; --border: rgba(0,0,0,.08); --header-bg: rgba(255,255,255,.95); }
-    body.dark { --bg: #0d1117; --bg-alt: #161b22; --card-bg: #1c2333; --text: #e6edf3; --text-secondary: #8b949e; --border: rgba(255,255,255,.08); --header-bg: rgba(13,17,23,.95); --shadow: 0 4px 30px rgba(0,0,0,.3); }
+    body.dark {
+      --bg: #1a1110; --bg-alt: #241918; --card-bg: #2d1f1e;
+      --text: #f0e3d4; --text-secondary: #b8a08e;
+      --border: rgba(200,80,50,.15); --header-bg: rgba(26,17,16,.97);
+      --shadow: 0 4px 30px rgba(0,0,0,.4);
+    }
     body { background: var(--bg); }
-    body.dark .top-bar { background: linear-gradient(135deg, #b8860b, #cc5500); }
-    body.dark header.scrolled { background: var(--header-bg); }
+    body.dark .top-bar { background: linear-gradient(135deg, #8B4513, #C62828); }
+    body.dark header.scrolled { background: var(--header-bg); backdrop-filter: blur(16px); }
     body.dark .service-card, body.dark .t-card, body.dark .news-card, body.dark .timeline-card, body.dark .contact-form { background: var(--card-bg); border-color: var(--border); }
     body.dark .contact-info div { background: var(--card-bg); border-color: var(--border); }
     body.dark .contact-form input, body.dark .contact-form textarea { background: var(--bg-alt); color: var(--text); border-color: var(--border); }
@@ -745,6 +750,15 @@
     body.dark .badge-100 { box-shadow: 0 2px 8px rgba(255,179,0,.15); }
     body.dark .hero-card { background: var(--card-bg); }
     body.dark .hero-stats div { background: var(--bg-alt); }
+    body.dark .section-tag { color: var(--gold); }
+    body.dark .section-title .hl { color: var(--gold); }
+    body.dark .pain { background: rgba(255,179,0,.1); color: var(--gold); }
+    body.dark .benefit strong { color: var(--gold); }
+    body.dark .num-context i { color: var(--gold); }
+    body.dark .news-card .tag { background: rgba(255,179,0,.15); color: var(--gold); }
+    body.dark .timeline-card .year { color: var(--gold); }
+    body.dark .contact-info h4 { color: var(--gold); }
+    body.dark .hero h5 i { color: var(--gold); }
     /* Dark mode toggle */
     .theme-toggle { background: none; border: none; cursor: pointer; font-size: 18px; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; transition: background .2s, color .2s; width: 40px; height: 40px; }
     header:not(.scrolled) .theme-toggle { color: #fff; }
