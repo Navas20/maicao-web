@@ -43,6 +43,7 @@
     body { font-family: var(--font); color: var(--text); line-height: 1.6; overflow-x: hidden; }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .progress-bar { display: none; }
       html { scroll-behavior: auto; }
     }
 
@@ -647,22 +648,43 @@
     #tramites { background: #fafafa; }
     #noticias { background: #fafafa; }
 
-    /* === ANIMACIONES === */
-    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .6s ease, transform .6s ease; }
+    /* === PROGRESS BAR === */
+    .progress-bar { position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 1001; pointer-events: none; background: linear-gradient(90deg, var(--gold), var(--orange)); transform-origin: left; animation: progress-grow 1s linear both; animation-timeline: scroll(root); }
+    @keyframes progress-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    /* === SCROLL-DRIVEN ANIMATIONS === */
+    @supports (animation-timeline: scroll()) {
+      .fade-up, .fade-left, .fade-right, .fade-scale { transition: none; }
+      .fade-up { animation: fade-up-scroll .8s var(--ease-out) both; animation-timeline: view(); animation-range: entry 0% entry 95%; }
+      .fade-left { animation: fade-left-scroll .8s var(--ease-out) both; animation-timeline: view(); animation-range: entry 0% entry 95%; }
+      .fade-right { animation: fade-right-scroll .8s var(--ease-out) both; animation-timeline: view(); animation-range: entry 0% entry 95%; }
+      .fade-scale { animation: fade-scale-scroll .8s var(--ease-out) both; animation-timeline: view(); animation-range: entry 0% entry 95%; }
+    }
+    @keyframes fade-up-scroll { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-left-scroll { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fade-right-scroll { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fade-scale-scroll { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+
+    /* Fallback transiciones para Firefox/legacy */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .services-grid .fade-up:nth-child(1) { transition-delay: 0ms; }
+    .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+    .fade-left.visible { opacity: 1; transform: translateX(0); }
+    .fade-right { opacity: 0; transform: translateX(40px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+    .fade-right.visible { opacity: 1; transform: translateX(0); }
+    .fade-scale { opacity: 0; transform: scale(.9); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+    .fade-scale.visible { opacity: 1; transform: scale(1); }
+
+    /* Stagger delays para fallback (CSS timeline usa scroll position natural) */
     .services-grid .fade-up:nth-child(2) { transition-delay: 80ms; }
     .services-grid .fade-up:nth-child(3) { transition-delay: 160ms; }
     .services-grid .fade-up:nth-child(4) { transition-delay: 240ms; }
     .services-grid .fade-up:nth-child(5) { transition-delay: 320ms; }
     .services-grid .fade-up:nth-child(6) { transition-delay: 400ms; }
-    .cultures-grid .fade-up:nth-child(1) { transition-delay: 0ms; }
-    .cultures-grid .fade-up:nth-child(2) { transition-delay: 120ms; }
-    .cultures-grid .fade-up:nth-child(3) { transition-delay: 240ms; }
-    .news-grid .fade-up:nth-child(1) { transition-delay: 0ms; }
+    .cultures-grid .fade-scale:nth-child(2) { transition-delay: 120ms; }
+    .cultures-grid .fade-scale:nth-child(3) { transition-delay: 240ms; }
     .news-grid .fade-up:nth-child(2) { transition-delay: 100ms; }
     .news-grid .fade-up:nth-child(3) { transition-delay: 200ms; }
-    .timeline .fade-up:nth-child(1) { transition-delay: 0ms; }
     .timeline .fade-up:nth-child(2) { transition-delay: 60ms; }
     .timeline .fade-up:nth-child(3) { transition-delay: 120ms; }
     .timeline .fade-up:nth-child(4) { transition-delay: 180ms; }
@@ -672,6 +694,8 @@
   </style>
 </head>
 <body>
+
+  <div class="progress-bar"></div>
 
   <!-- TOP BAR -->
   <div class="top-bar">
@@ -767,42 +791,42 @@
       <h2 class="section-title">Evita la fila. <span class="hl">Resuelve aquí</span></h2>
       <p class="section-sub">Más de 2,300 personas ya resolvieron sus trámites este mes sin pisar la Alcaldía. Tú también puedes.</p>
       <div class="services-grid">
-        <a href="#" class="service-card">
+        <a href="#" class="service-card fade-up">
           <div class="icon water"><i class="fas fa-water"></i></div>
           <h3>Reportar falta de agua</h3>
           <div class="benefit">Notifica fugas, averías o cortes en tu sector. Respuesta en <strong>menos de 24h</strong>.</div>
           <span class="pain">🕐 Sin filas</span>
           <div class="arrow">Reportar ahora <i class="fas fa-arrow-right"></i></div>
         </a>
-        <a href="#" class="service-card">
+        <a href="#" class="service-card fade-up">
           <div class="icon pqrs"><i class="fas fa-clipboard-list"></i></div>
           <h3>PQRS — Petición, Queja o Reclamo</h3>
           <div class="benefit">Presenta tu solicitud con seguimiento en tiempo real. Olvídate del correo sin respuesta.</div>
           <span class="pain">🕐 2 min</span>
           <div class="arrow">Iniciar PQRS <i class="fas fa-arrow-right"></i></div>
         </a>
-        <a href="#" class="service-card">
+        <a href="#" class="service-card fade-up">
           <div class="icon tax"><i class="fas fa-file-invoice-dollar"></i></div>
           <h3>Pagar impuesto predial</h3>
           <div class="benefit">Evita intereses por mora. Paga tu predial e industria y comercio desde casa.</div>
           <span class="pain">🔒 Pago seguro</span>
           <div class="arrow">Pagar ahora <i class="fas fa-arrow-right"></i></div>
         </a>
-        <a href="#" class="service-card">
+        <a href="#" class="service-card fade-up">
           <div class="icon cert"><i class="fas fa-file-contract"></i></div>
           <h3>Certificado de residencia</h3>
           <div class="benefit">Solicítalo en línea y recíbelo digital. Sin ir al CAM.</div>
           <span class="pain">📄 Recibes PDF</span>
           <div class="arrow">Solicitar <i class="fas fa-arrow-right"></i></div>
         </a>
-        <a href="#" class="service-card">
+        <a href="#" class="service-card fade-up">
           <div class="icon gov"><i class="fas fa-building"></i></div>
           <h3>Directorio de Secretarías</h3>
           <div class="benefit">Salud, Planeación, Gobierno, Hacienda, Infraestructura — contacta directo.</div>
           <span class="pain">📞 Todos los números</span>
           <div class="arrow">Ver directorio <i class="fas fa-arrow-right"></i></div>
         </a>
-        <a href="#" class="service-card">
+        <a href="#" class="service-card fade-up">
           <div class="icon alert"><i class="fas fa-shield-alt"></i></div>
           <h3>Reporte de seguridad</h3>
           <div class="benefit">Conecta con la Policía Comunitaria. Reporta incidentes de forma anónima.</div>
@@ -820,22 +844,22 @@
       <h2 class="section-title">Gestión <span class="hl">abierta</span> y <span class="hl">clara</span></h2>
       <p class="section-sub">Creemos en un gobierno que rinde cuentas. Estos son los resultados de nuestra gestión municipal.</p>
       <div class="transparencia-grid">
-        <div class="t-card">
+        <div class="t-card fade-up">
           <div class="num" data-count="74" data-suffix="%">0</div>
           <div class="num-label">Avance en obras de alcantarillado</div>
           <div class="num-context"><i class="fas fa-arrow-up"></i> +12% este trimestre</div>
         </div>
-        <div class="t-card">
+        <div class="t-card fade-up">
           <div class="num" data-count="2300" data-suffix="+">0</div>
           <div class="num-label">Reportes ciudadanos resueltos</div>
           <div class="num-context"><i class="fas fa-check-circle"></i> 94% satisfacción</div>
         </div>
-        <div class="t-card">
+        <div class="t-card fade-up">
           <div class="num" data-count="49219" data-suffix="">0</div>
           <div class="num-label">Galones de combustible gestionados</div>
           <div class="num-context"><i class="fas fa-truck"></i> +5 estaciones abastecidas</div>
         </div>
-        <div class="t-card">
+        <div class="t-card fade-up">
           <div class="num" data-count="100" data-suffix="">0</div>
           <div class="num-label">Años construyendo historia</div>
           <div class="num-context"><i class="fas fa-star"></i> Centenario 2026</div>
@@ -851,7 +875,7 @@
       <h2 class="section-title">Donde <span class="hl">tres mundos</span> se encuentran</h2>
       <p class="section-sub">Maicao es un tapiz único tejido por la herencia Wayuu, la inmigración árabe y la tradición criolla. Una convivencia pacífica que nos enriquece.</p>
       <div class="cultures-grid">
-        <div class="culture-card">
+        <div class="culture-card fade-scale">
           <div class="bg" style="background: linear-gradient(135deg, #C62828, #E65100);"></div>
           <div class="overlay"></div>
           <div class="info">
@@ -860,7 +884,7 @@
             <p>El nombre Maicao proviene del Wayunaiki "Mai-ka-u": Tierra del Maíz. Pueblo indígena guerrero, tejedores de kanas y guardianes de una cosmovisión milenaria.</p>
           </div>
         </div>
-        <div class="culture-card">
+        <div class="culture-card fade-scale">
           <div class="bg" style="background: linear-gradient(135deg, #0D47A1, #00695C);"></div>
           <div class="overlay"></div>
           <div class="info">
@@ -869,7 +893,7 @@
             <p>La comunidad sirio-libanesa y palestina es el principal centro de presencia árabe en Colombia. Hogar de la Mezquita Omar Ibn Al-Jattab, la tercera más grande de Latinoamérica.</p>
           </div>
         </div>
-        <div class="culture-card">
+        <div class="culture-card fade-scale">
           <div class="bg" style="background: linear-gradient(135deg, #4A148C, #0D47A1);"></div>
           <div class="overlay"></div>
           <div class="info">
@@ -889,7 +913,7 @@
       <h2 class="section-title">Últimas <span class="hl">noticias</span></h2>
       <p class="section-sub">Mantente informado sobre las acciones, programas y eventos de la Administración Municipal.</p>
       <div class="news-grid">
-        <div class="news-card">
+        <div class="news-card fade-up">
           <div class="thumb"><i class="fas fa-gem"></i></div>
           <div class="body">
             <span class="tag">Centenario</span>
@@ -898,7 +922,7 @@
             <div class="date"><i class="far fa-calendar-alt"></i> 29 junio 2026</div>
           </div>
         </div>
-        <div class="news-card">
+        <div class="news-card fade-up">
           <div class="thumb"><i class="fas fa-tint"></i></div>
           <div class="body">
             <span class="tag">Servicios</span>
@@ -907,7 +931,7 @@
             <div class="date"><i class="far fa-calendar-alt"></i> 19 mayo 2026</div>
           </div>
         </div>
-        <div class="news-card">
+        <div class="news-card fade-up">
           <div class="thumb"><i class="fas fa-leaf"></i></div>
           <div class="body">
             <span class="tag">Ambiente</span>
@@ -927,37 +951,37 @@
       <h2 class="section-title">Un siglo de <span class="hl">encuentro</span> y <span class="hl">progreso</span></h2>
       <p class="section-sub">El Congreso de Colombia declaró 2026 como el Año del Centenario de Maicao mediante la Ley 2571, asociándose a la conmemoración de sus 100 años de fundación.</p>
       <div class="timeline">
-        <div class="timeline-card">
+        <div class="timeline-card fade-up">
           <div class="year">1927</div>
           <h4>Fundación</h4>
           <p>El coronel Rodolfo Morales y Tomás Curvelo Iguarán fundan Maicao sobre territorio Wayuu, estableciendo un puesto de control en el cruce hacia la península de La Guajira.</p>
         </div>
-        <div class="timeline-card">
+        <div class="timeline-card fade-up">
           <div class="year">1935</div>
           <h4>Corregimiento</h4>
           <p>Maicao es declarado corregimiento del departamento del Magdalena. Llegan las primeras oleadas de "cachacos" del interior del país.</p>
         </div>
-        <div class="timeline-card">
+        <div class="timeline-card fade-up">
           <div class="year">1936</div>
           <h4>Puerto Libre</h4>
           <p>Declarado "Puerto Libre Terrestre", impulsando su vocación comercial fronteriza y sentando las bases de su economía.</p>
         </div>
-        <div class="timeline-card">
+        <div class="timeline-card fade-up">
           <div class="year">1948</div>
           <h4>Llegada Árabe</h4>
           <p>Arriban los primeros inmigrantes sirios, libaneses y palestinos, conocidos como "turcos", que transformarían el comercio local.</p>
         </div>
-        <div class="timeline-card">
+        <div class="timeline-card fade-up">
           <div class="year">1955</div>
           <h4>Municipio</h4>
           <p>El 13 de junio, bajo el gobierno de Gustavo Rojas Pinilla, Maicao es elevado a la categoría de municipio. Se nombra al teniente Jaime Gasca como primer mandatario.</p>
         </div>
-        <div class="timeline-card">
+        <div class="timeline-card fade-up">
           <div class="year">1970</div>
           <h4>Boom Comercial</h4>
           <p>Gracias al auge petrolero en Venezuela, Maicao se convierte en el principal centro de comercio binacional de la frontera colombo-venezolana.</p>
         </div>
-        <div class="timeline-card">
+        <div class="timeline-card fade-up">
           <div class="year">2026</div>
           <h4>Centenario</h4>
           <p>El Congreso expide la Ley 2571 declarando 2026 como el Año del Centenario. La Nación se asocia a la conmemoración y rinde homenaje a sus pobladores.</p>
@@ -1120,18 +1144,15 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // === SCROLL ANIMATIONS ===
-    const observer = new IntersectionObserver((entries) => {
+    // === SCROLL ANIMATIONS (fallback para Firefox) ===
+    const animObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: .1 });
 
-    document.querySelectorAll('.service-card, .culture-card, .t-card, .news-card, .timeline-card').forEach(el => {
-      el.classList.add('fade-up');
-      observer.observe(el);
+    document.querySelectorAll('.fade-up, .fade-left, .fade-right, .fade-scale').forEach(el => {
+      animObserver.observe(el);
     });
 
     // === COUNTER ANIMATION ===
